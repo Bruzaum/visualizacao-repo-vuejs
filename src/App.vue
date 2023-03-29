@@ -1,60 +1,70 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
+  <div>
+    <BuscaRepo
+      @ShowView="Show_View"
+      @getUser="get_User"
+      v-if="viewShow === true"
+    />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 
-export default {
-  name: 'App',
+  import BuscaRepo from './components/BuscaRepo.vue'
 
-  components: {
-    HelloWorld,
-  },
+  window.addEventListener("load", (e) => {
+    e.preventDefault();
+    localStorage.clear();
+  })
 
-  data: () => ({
-    //
-  }),
-};
+  export default {
+    name: 'App',
+    components: {
+      BuscaRepo
+    },
+    data() {
+      const savedView = localStorage.getItem('view')
+      const savedUser = localStorage.getItem('user')
+      return {
+        viewShow: savedView ? savedView : true,
+        user: savedUser ? savedUser : ''
+      }
+    },
+    methods: {
+      Show_View() {
+        this.viewShow = !this.viewShow
+      },
+      get_User() {
+        const text = document.getElementById('input-group')
+        if (this.user === '') {
+          this.user = text.value
+        } else {
+          this.user = ''
+        }
+      }
+    },
+    watch: {
+      viewShow(val) {
+        localStorage.setItem('view', val)
+      },
+      user(val) {
+        localStorage.setItem('user', val)
+      },
+      mounted() {
+        alert(this.user)
+      }
+    }
+  }
 </script>
+
+
+<style>
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+  font-family: 'Open Sans', sans-serif;
+}
+</style>

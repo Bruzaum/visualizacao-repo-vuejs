@@ -5,12 +5,19 @@
       @getUser="get_User"
       v-if="viewShow === true"
     />
+    <VisualizaRepo
+      @ShowView2="Show_View"
+      @resetUser="get_User"
+      :user="user"
+      v-else
+    />
   </div>
 </template>
 
 <script>
 
   import BuscaRepo from './components/BuscaRepo.vue'
+  import VisualizaRepo from './components/VisualizaRepo.vue'
 
   window.addEventListener("load", (e) => {
     e.preventDefault();
@@ -20,7 +27,8 @@
   export default {
     name: 'App',
     components: {
-      BuscaRepo
+      BuscaRepo,
+      VisualizaRepo
     },
     data() {
       const savedView = localStorage.getItem('view')

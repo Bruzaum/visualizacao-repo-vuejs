@@ -12,9 +12,7 @@
                     <i class="uil uil-github"></i>
                     <span class="header-txt--strong">Github</span> profiles
                 </h1>
-                <button class="change-username" v-if="changeUsername">CHANGE USERNAME</button>
             </div>
-            
         </div>
         
       </header>
@@ -34,6 +32,7 @@
               class="btn btn-outline-secondary"
               type="button"
               id="button-addon2"
+              @click="$emit('ShowView'), $emit('getUser')"
             >
               <i class="uil uil-search"></i>
             </button>
@@ -84,19 +83,6 @@
         font-weight: 700;
         color: #fff;
         font-size: 2.5rem!important;
-    }
-    .change-username{
-        background-color: #5c646d;
-        color: #fff;
-        border-color: #fff;
-        border-radius: 4px;
-        padding: 0.3rem;
-        text-align:end;
-    }
-    .change-username:hover {
-        cursor: pointer;
-        color: orange;
-        border-color: orange;
     }
     .input-username {
         display: flex;

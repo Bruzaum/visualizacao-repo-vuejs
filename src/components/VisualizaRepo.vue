@@ -412,7 +412,7 @@
 
 		header{
 			margin-top: 20px;
-			width: 90%;
+			width: 100%;
 			height: 35%;
 			margin-bottom: 30px;
 		}
@@ -442,7 +442,7 @@
 		}
 
 		main{
-			width: 90%;
+			width: 100%;
 			padding: 0 0;
 		}
 
@@ -479,7 +479,7 @@
 
 		header{
 			margin-top: 20px;
-			width: 90%;
+			width: 100%;
 			height: 35%;
 			margin-bottom: 30px;
 		}
@@ -509,7 +509,7 @@
 		}
 
 		main{
-			width: 90%;
+			width: 100%;
 			padding: 0 0;
 		}
 

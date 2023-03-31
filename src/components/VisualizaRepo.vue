@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-multiple-template-root -->
 <!-- eslint-disable no-mixed-spaces-and-tabs -->
 <template>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
@@ -41,12 +42,12 @@
       	<main>
 			<section class="container text-center">
 				<nav class="total-repositories">
-					<a class="total-repositories" href="#"  v-on:click="addRepoClass" :class="{'sublinhado': isRepoClass}">
+					<a class="total-repositories" href="#"  v-on:click="showRepositories(); addRepoClass();" :class="{'sublinhado': isRepoClass}">
 						<h2>Repos </h2>
 						<span class="total-repositories--counter">{{ totalRepositories }}</span>
 					</a>
 
-					<a class="total-repositories" href="#" v-on:click="addStarClass" :class="{'sublinhado': isStarClass}">
+					<a class="total-repositories" href="#" v-on:click="showStar(); addStarClass();" :class="{'sublinhado': isStarClass}">
 						<h2 class="starred">Starred </h2>
 						<span class="total-repositories--counter">{{ totalStarRepositories }}</span>
 					</a>
@@ -61,26 +62,51 @@
 				</div>
 		
 				<!-- Repositories -->
-				<ul class="repositories overflow-auto">
-					<li
-					class="d-flex flex-column"
-					v-for="(repository) in filtered_repos"
-					:key="repository.name"
-					>
-					<div class="d-flex justify-content-between align-items-center">
-						<h3 class="repoTitle">
-						{{ repository.name }}
-						</h3>
-						<p>{{ repository.description }}</p>
-					</div>
-					<div class="d-flex justify-content-between align-items-center">
-						<i class="uil uil-arrow"></i>
-						<span> {{ repository.language }} </span>
-						<i class="uil uil-code-branch"></i>
-						<span> {{ repository.forks }} </span>
-					</div>
-					</li>
-				</ul>
+				<div v-if="!isShowStar">
+					<ul class="repositories overflow-auto">
+						<li
+						class="d-flex flex-column"
+						v-for="(repository) in filtered_repos"
+						:key="repository.name"
+						>
+						<div class="d-flex justify-content-between align-items-center">
+							<h3 class="repoTitle">
+							{{ repository.name }}
+							</h3>
+							<p>{{ repository.description }}</p>
+						</div>
+						<div class="d-flex justify-content-between align-items-center">
+							<i class="uil uil-arrow"></i>
+							<span> {{ repository.language }} </span>
+							<i class="uil uil-code-branch"></i>
+							<span> {{ repository.forks }} </span>
+						</div>
+						</li>
+					</ul>
+				</div>
+				<div v-else>
+					<ul class="repositories overflow-auto">
+						<li
+						class="d-flex flex-column"
+						v-for="(repository) in filtered_star_repos"
+						:key="repository.name"
+						>
+						<div class="d-flex justify-content-between align-items-center">
+							<h3 class="repoTitle">
+							{{ repository.name }}
+							</h3>
+							<p>{{ repository.description }}</p>
+						</div>
+						<div class="d-flex justify-content-between align-items-center">
+							<i class="uil uil-arrow"></i>
+							<span> {{ repository.language }} </span>
+							<i class="uil uil-code-branch"></i>
+							<span> {{ repository.forks }} </span>
+						</div>
+						</li>
+					</ul>
+				</div>
+				
           		<!-- End Repositories -->
         	</section>
     	</main>
@@ -115,8 +141,9 @@
 			alert: null,
 			repositories: [],
 			starsRepositories: [],
-			isRepoClass: false,
-			isStarClass: false
+			isRepoClass: true,
+			isStarClass: false,
+			isShowStar: false
 		}
 		},
 		methods: {
@@ -127,6 +154,12 @@
 		addStarClass: function() {
 			this.isRepoClass = false;
 			this.isStarClass = true;
+		},
+		showStar: function() {
+			this.isShowStar = true;
+		},
+		showRepositories: function() {
+			this.isShowStar = false;
 		},
 		async geTinfo() {
 			this.Auser = this.user
@@ -175,7 +208,12 @@
 				return this.repositories.filter((item) => {
 					return item.name.toLowerCase().includes(this.search.toLowerCase())
 				})
-			}
+			},
+			filtered_star_repos() {
+				return this.starsRepositories.filter((item) => {
+					return item.name.toLowerCase().includes(this.search.toLowerCase())
+				})
+			},
 		}
 	}
 </script>

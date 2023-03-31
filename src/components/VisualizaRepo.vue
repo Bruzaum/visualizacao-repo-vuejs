@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-parsing-error -->
 <!-- eslint-disable vue/no-multiple-template-root -->
 <!-- eslint-disable no-mixed-spaces-and-tabs -->
 <template>
@@ -74,9 +75,11 @@
 						:key="repository.name"
 						>
 						<div class="d-flex justify-content-between align-items-center">
-							<h3 class="repoTitle">
-							{{ repository.name }}
-							</h3>
+							<a :href="'https://github.com/' + repository.full_name">
+								<h3 class="repoTitle">
+								{{ repository.name }}
+								</h3>
+							</a>
 							<p>{{ repository.description }}</p>
 						</div>
 						<div class="d-flex justify-content-between align-items-center">
@@ -96,9 +99,11 @@
 						:key="repository.name"
 						>
 						<div class="d-flex justify-content-between align-items-center">
-							<h3 class="repoTitle">
-							{{ repository.name }}
-							</h3>
+							<a :href="'https://github.com/' + repository.full_name">
+								<h3 class="repoTitle">
+								{{ repository.name }}
+								</h3>
+							</a>
 							<p>{{ repository.description }}</p>
 						</div>
 						<div class="d-flex justify-content-between align-items-center">
@@ -142,6 +147,7 @@
 			name: null,
 			totalRepositories: null,
 			totalStarRepositories: null,
+			repoURL: null,
 			alert: null,
 			repositories: [],
 			starsRepositories: [],
@@ -179,17 +185,18 @@
 			})
 			const urlRepositories = `https://api.github.com/users/${this.Auser}/repos`
 			const urlStarredRepositories = `https://api.github.com/users/${this.Auser}/starred`
+			//const urlRepos = `https://api.github.com/${this.Auser}/${this.name}`
 			await fetch(urlRepositories)
 			.then(response => response.json())
 			.then(infoRepositories => {
 				this.repositories = infoRepositories
-				console.log(this.repositories.index)
 			})
 			await fetch(urlStarredRepositories)
 			.then(response => response.json())
 			.then(infoRepositories => {
 				this.starsRepositories  = infoRepositories
 			})
+			
 			this.totalStarRepositories = this.starsRepositories.length
 			this.checkRepo()
 		},
@@ -459,6 +466,9 @@
 		}
 		.form-control{
 			text-align: center;
+		}
+		section .repositories {
+			padding: 0 1rem;
 		}
 
 	}

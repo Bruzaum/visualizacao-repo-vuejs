@@ -23,14 +23,16 @@
 			<div class="perfil mt-3">
 				<img :src="avatar" alt="usuário" class="me-3" />
 				<br />
-				<div class="infoHeader">
-					<h2>{{ name }}</h2>
-				</div>
-				<!-- Description -->
-				<div class="bio">
-					<span class="mt-3 mb-3">
-						{{ bio }}
-					</span>
+				<div class="infos">
+					<div class="infoHeader">
+						<h2>{{ name }}</h2>
+					</div>
+					<!-- Description -->
+					<div class="bio">
+						<span class="mt-3 mb-3">
+							{{ bio }}
+						</span>
+					</div>
 				</div>
 				<!-- End Description -->
 			</div>
@@ -41,24 +43,26 @@
       <!-- MAIN -->
       	<main>
 			<section class="container text-center">
-				<nav class="total-repositories">
-					<a class="total-repositories" href="#"  v-on:click="showRepositories(); addRepoClass();" :class="{'sublinhado': isRepoClass}">
-						<h2>Repos </h2>
-						<span class="total-repositories--counter">{{ totalRepositories }}</span>
-					</a>
-
-					<a class="total-repositories" href="#" v-on:click="showStar(); addStarClass();" :class="{'sublinhado': isStarClass}">
-						<h2 class="starred">Starred </h2>
-						<span class="total-repositories--counter">{{ totalStarRepositories }}</span>
-					</a>
-				</nav>		
-		
-				<div class="input-group mb-2">
-					<input
-						v-model="search"	
-						class="form-control"
-						placeholder="Filtre pelo nome"
-					>
+				<div class="cabecalho">
+					<nav class="total-repositories">
+						<a class="total-repositories" href="#"  v-on:click="showRepositories(); addRepoClass();" :class="{'sublinhado': isRepoClass}">
+							<h2>Repos </h2>
+							<span class="total-repositories--counter">{{ totalRepositories }}</span>
+						</a>
+	
+						<a class="total-repositories" href="#" v-on:click="showStar(); addStarClass();" :class="{'sublinhado': isStarClass}">
+							<h2 class="starred">Starred </h2>
+							<span class="total-repositories--counter">{{ totalStarRepositories }}</span>
+						</a>
+					</nav>		
+			
+					<div class="input-group mb-2">
+						<input
+							v-model="search"	
+							class="form-control"
+							placeholder="Filtre pelo nome"
+						>
+					</div>
 				</div>
 		
 				<!-- Repositories -->
@@ -249,13 +253,13 @@
     .header-txt--strong{
         font-weight: 700;
         color: #fff;
-        font-size: 2rem!important;
+        font-size: 2rem;
     }
     .uil-github{
         margin-right: 0.2em;
         font-weight: 700;
         color: #fff;
-        font-size: 2.5rem!important;
+        font-size: 2.5rem;
     }
     .change-username{
         background-color: #5c646d;
@@ -263,7 +267,7 @@
         border-color: #fff;
         border-radius: 8px;
         padding: 0.3rem;
-        text-align:end;
+        text-align:center;
 		font-size: 0.6rem;
     }
     .change-username:hover {
@@ -274,9 +278,8 @@
 	/* HEADER */
 	header {
 		margin-top: 20px;
-		max-width: 25%;
-		min-height: 35%;
-		max-height: 50%;
+		width: 25%;
+		height: 35%;
 	}
 
 	div.perfil {
@@ -295,6 +298,8 @@
 	div.infoHeader {
 		font-weight: 700;
 		font-size: 0.93rem;
+		padding: 0.1rem 0.8rem;
+		text-align: center;
 	}
 	header div.bio {
 		padding: 0.1rem 0.8rem;
@@ -377,7 +382,7 @@
 	}
 
 	.uil-arrow-up{
-		font-size: 5rem!important;
+		font-size: 5rem;
 		display: flex;
 		justify-content: flex-end;
 		margin-right: 2.5rem;
@@ -387,7 +392,147 @@
 		height: 40px;
 		padding: 1rem;
 		margin-top: 25px;
-		min-width: 40%;
+		width: 80%;
 		border-radius: 6px;
+	}
+
+	@media screen and (max-width: 1024px) and (min-width: 601px) {
+		.showRepo{
+			display: block;
+		}
+		.header-txt {
+			font-size: 1rem;
+		}
+		.header-txt--strong{
+			font-size: 1.2rem;
+		}
+		.uil-github{
+			font-size: 1.5rem;
+		}
+
+		header{
+			margin-top: 20px;
+			width: 90%;
+			height: 35%;
+			margin-bottom: 30px;
+		}
+		div.perfil {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;	
+			align-items: center;
+			padding-left: 0.8rem;
+		}
+
+		div.perfil img {
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			border: none;
+		}
+		div.infoHeader {
+			font-weight: 700;
+			font-size: 0.93rem;
+			padding-left: 0.8rem;
+		}
+		header div.bio {
+			padding: 0.1rem 0.8rem;
+			text-align: center;
+			font-size: 0.88rem;
+		}
+
+		main{
+			width: 90%;
+			padding: 0 0;
+		}
+
+		.cabecalho{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.input-group {
+			width: 80%;
+			max-width: 95%;
+			text-align: center;
+		}
+		.form-control{
+			text-align: center;
+		}
+
+	}
+
+	@media screen and (max-width: 600px) {
+		.showRepo{
+			display: block;
+		}
+		.header-txt {
+			font-size: 1rem;
+		}
+		.header-txt--strong{
+			font-size: 1.2rem;
+		}
+		.uil-github{
+			font-size: 1.5rem;
+		}
+
+		header{
+			margin-top: 20px;
+			width: 90%;
+			height: 35%;
+			margin-bottom: 30px;
+		}
+		div.perfil {
+			display: flex;
+			flex-direction: row;
+			justify-content: center;	
+			align-items: center;
+			padding-left: 0.8rem;
+		}
+
+		div.perfil img {
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			border: none;
+		}
+		div.infoHeader {
+			font-weight: 700;
+			font-size: 0.93rem;
+			padding-left: 0.8rem;
+		}
+		header div.bio {
+			padding: 0.1rem 0.8rem;
+			text-align: center;
+			font-size: 0.88rem;
+		}
+
+		main{
+			width: 90%;
+			padding: 0 0;
+		}
+
+		.cabecalho{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.input-group {
+			width: 80%;
+			max-width: 95%;
+			text-align: center;
+		}
+		.form-control{
+			text-align: center;
+		}
+		section .repositories {
+			text-align: center;
+		}
+
+		section .repositories p {
+			font-size: 0.7rem;
+		}
 	}
 </style>

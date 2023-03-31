@@ -77,18 +77,18 @@ export default {
   .header-txt--strong{
       font-weight: 700;
       color: #fff;
-      font-size: 2rem!important;
+      font-size: 2rem;
   }
   .uil-github{
       margin-right: 0.2em;
       font-weight: 700;
       color: #fff;
-      font-size: 2.5rem!important;
+      font-size: 2.5rem;
   }
   .input-username {
       display: flex;
       justify-content: center;   
-      padding-top: 2rem;
+      padding: 2rem 1rem;
   }
   .input-group {
       width: 400px;
@@ -105,5 +105,17 @@ export default {
       border-radius: 4px;
       font-weight: 700;
       cursor: pointer;
+  }
+
+  @media screen and (max-width: 768px) {
+    .header-txt {
+        font-size: 1.2rem;
+    }
+    .header-txt--strong{
+        font-size: 1.5rem;
+    }
+    .uil-github{
+        font-size: 2rem;
+    }
   }
 </style>
